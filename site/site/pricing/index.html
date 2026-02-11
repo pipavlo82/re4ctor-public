@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Re4ctoR — Pricing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      margin: 0;
+      background: #020617;
+      color: #e5e7eb;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    header {
+      padding: 16px 24px;
+      border-bottom: 1px solid #1f2937;
+    }
+    header a {
+      text-decoration: none;
+      color: #e5e7eb;
+      font-weight: 600;
+    }
+    .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 16px 64px;
+    }
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+    p {
+      color: #cdd6e5;
+      max-width: 640px;
+      line-height: 1.6;
+    }
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .plan {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 24px 20px;
+    }
+    .plan h2 {
+      font-size: 1.4rem;
+      margin-bottom: 0.25rem;
+    }
+    .price {
+      font-size: 1.6rem;
+      margin: 10px 0 18px;
+      color: #10b981;
+    }
+    ul {
+      margin-left: 1rem;
+      line-height: 1.6;
+    }
+    .cta {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      background: #10b981;
+      color: #000;
+      font-weight: 600;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="/">⟵ Re4ctoR</a>
+</header>
+
+<main class="wrap">
+  <h1>Pricing</h1>
+  <p>
+    Flexible pricing for developers, businesses, and mission-critical systems.
+    Run Re4ctoR as SaaS via Cloudflare, or deploy on your own hardware
+    for maximum control.
+  </p>
+
+  <div class="plans">
+
+    <div class="plan">
+      <h2>Free / Demo</h2>
+      <div class="price">$0 / month</div>
+      <ul>
+        <li>10k requests/day</li>
+        <li>/v1/random</li>
+        <li>HTTP API + signatures</li>
+        <li>Global Cloudflare routing</li>
+      </ul>
+      <a class="cta" href="#">Get Free Key</a>
+    </div>
+
+    <div class="plan">
+      <h2>Developer</h2>
+      <div class="price">$19 / month</div>
+      <ul>
+        <li>1 million requests/month</li>
+        <li>/v1/random + /v1/random_pq</li>
+        <li>ECDSA signatures</li>
+        <li>Low-latency edge delivery</li>
+        <li>Email support</li>
+      </ul>
+      <a class="cta" href="#">Start Now</a>
+    </div>
+
+    <div class="plan">
+      <h2>Business</h2>
+      <div class="price">$199 / month</div>
+      <ul>
+        <li>50 million requests/month</li>
+        <li>Dual ECDSA + ML-DSA signatures</li>
+        <li>Guaranteed 20–30ms global latency</li>
+        <li>Rate limit boost</li>
+        <li>Priority support</li>
+      </ul>
+      <a class="cta" href="#">Contact Sales</a>
+    </div>
+
+    <div class="plan">
+      <h2>Enterprise / Defense</h2>
+      <div class="price">Custom</div>
+      <ul>
+        <li>Unlimited requests</li>
+        <li>On-prem / air-gapped deployment</li>
+        <li>FIPS 140-3 preparation kit</li>
+        <li>Secure Enclave Edition</li>
+        <li>NDA + Dedicated support</li>
+      </ul>
+      <a class="cta" href="#">Request NDA</a>
+    </div>
+
+  </div>
+</main>
+
+</body>
+</html>

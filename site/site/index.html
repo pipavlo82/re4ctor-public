@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Re4ctoR — Nuclear-grade entropy & PQ-VRF</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #040711;
+      color: #f5f5f5;
+      display: flex;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+    }
+    .wrap {
+      max-width: 960px;
+      padding: 32px 24px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle {
+      font-size: 1.05rem;
+      max-width: 640px;
+      line-height: 1.5;
+      color: #c7d0e0;
+      margin-bottom: 1.5rem;
+    }
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 1.5rem;
+      font-size: 0.85rem;
+    }
+    .badge {
+      border-radius: 999px;
+      padding: 4px 10px;
+      border: 1px solid rgba(100, 255, 218, 0.4);
+      color: #e6fffb;
+      background: rgba(10, 38, 61, 0.8);
+      backdrop-filter: blur(6px);
+    }
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: none;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #10b981, #22c55e);
+      color: #020617;
+    }
+    .btn-ghost {
+      background: transparent;
+      color: #e5e7eb;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+    }
+    .meta {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      max-width: 560px;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>Re4ctoR — nuclear-grade randomness for crypto &amp; defense</h1>
+
+    <p class="subtitle">
+      FIPS-ready entropy appliance and API with <strong>&lt;1&nbsp;ms</strong> core latency and
+      <strong>~20–30&nbsp;ms</strong> global SaaS delivery via Cloudflare. High-entropy RNG,
+      post-quantum-ready VRF and on-chain verification for protocols that cannot afford toy randomness.
+    </p>
+
+    <div class="badges">
+      <span class="badge">High-entropy core • NIST STS / Dieharder / PractRand</span>
+      <span class="badge">Hybrid ECDSA + PQ signatures (ML-DSA / Dilithium roadmap)</span>
+      <span class="badge">Self-hosted or SaaS</span>
+      <span class="badge">Cloudflare edge • HTTP/2 / HTTP/3</span>
+    </div>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://api.re4ctor.com/v1/random?n=8&amp;fmt=hex" target="_blank" rel="noreferrer">
+        Get API Key (demo)
+      </a>
+      <a class="btn btn-ghost" href="/docs">
+        See Documentation
+      </a>
+    </div>
+
+    <p class="meta">
+      Live API base URL: <code>https://api.re4ctor.com</code> · Auth via
+      <code>X-API-Key: demo</code> for the public demo tier.<br/>
+      Architecture: Cloudflare → Caddy → API Gateway → Entropy Core.
+    </p>
+  </main>
+</body>
+</html>

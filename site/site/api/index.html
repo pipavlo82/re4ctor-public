@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>API Documentation — Re4ctoR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #020617;
+      color: #e5e7eb;
+    }
+    header {
+      padding: 14px 20px;
+      border-bottom: 1px solid #1f2937;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #020617;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .logo {
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+    }
+    nav a {
+      color: #9ca3af;
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-left: 14px;
+    }
+    nav a:hover {
+      color: #e5e7eb;
+    }
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px 16px 60px;
+    }
+    h1 { font-size: 1.8rem; margin-bottom: 8px; }
+    h2 { font-size: 1.2rem; margin-top: 22px; margin-bottom: 8px; }
+    h3 { font-size: 1rem; margin-top: 16px; margin-bottom: 6px; }
+    p { margin: 4px 0 10px; color: #9ca3af; font-size: 0.9rem; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.8rem;
+      background: #020617;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+    pre {
+      margin: 0 0 10px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: #020617;
+      border: 1px solid #1f2937;
+      overflow-x: auto;
+      font-size: 0.8rem;
+    }
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      border: 1px solid #16a34a;
+      color: #bbf7d0;
+      margin-right: 6px;
+    }
+    .badge-secondary {
+      border-color: #0ea5e9;
+      color: #bae6fd;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 0.85rem;
+    }
+    th, td {
+      border: 1px solid #1f2937;
+      padding: 6px 8px;
+      text-align: left;
+    }
+    th { background: #020617; }
+    .endpoint {
+      margin-top: 14px;
+      margin-bottom: 10px;
+    }
+    .endpoint-method {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-right: 4px;
+    }
+    .method-get {
+      background: rgba(34,197,94,0.15);
+      color: #4ade80;
+    }
+    .method-post {
+      background: rgba(59,130,246,0.15);
+      color: #60a5fa;
+    }
+    .endpoint-path {
+      font-family: ui-monospace, SFMono-Regular;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">RE4CTOR API</div>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/docs">Swagger /docs</a>
+      <a href="/api">API</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="badge">FIPS-ready</div>
+    <div class="badge badge-secondary">Dual-signed VRF (ECDSA + ML-DSA-65)</div>
+
+    <h1>API Documentation</h1>
+    <p>
+      Re4ctoR exposes a hardened HTTP gateway in front of the Core RNG and VRF node.
+      All public calls (except health) require <code>X-API-Key</code>.
+    </p>
+
+    <h2>Base URL</h2>
+    <p>Production gateway: <code>https://api.re4ctor.com</code></p>
+
+    <h2>Authentication</h2>
+    <p>Header: <code>X-API-Key: demo</code> (dev / demo plan)</p>
+
+    <h2>Endpoints</h2>
+
+    <div class="endpoint">
+      <div>
+        <span class="endpoint-method method-get">GET</span>
+        <span class="endpoint-path">/v1/health</span>
+      </div>
+      <p>Lightweight health check of the gateway.</p>
+      <pre><code>curl -s "https://api.re4ctor.com/v1/health"</code></pre>
+    </div>
+
+    <div class="endpoint">
+      <div>
+        <span class="endpoint-method method-get">GET</span>
+        <span class="endpoint-path">/v1/random</span>
+      </div>
+      <p>High-entropy random bytes proxied from RE4CTOR Core RNG.</p>
+      <table>
+        <tr><th>Query</th><th>Type</th><th>Description</th></tr>
+        <tr><td><code>n</code></td><td>int</td><td>Number of bytes to return (e.g. 16, 32).</td></tr>
+        <tr><td><code>fmt</code></td><td>string</td><td><code>hex</code> (default) or <code>raw</code>.</td></tr>
+      </table>
+      <pre><code>curl -s -H "X-API-Key: demo" \
+  "https://api.re4ctor.com/v1/random?n=16&fmt=hex"</code></pre>
+    </div>
+
+    <div class="endpoint">
+      <div>
+        <span class="endpoint-method method-get">GET</span>
+        <span class="endpoint-path">/v1/vrf</span>
+      </div>
+      <p>
+        Dual-signed VRF-style randomness, proxied до VRF node (всередині він викликає
+        свій <code>/random_dual</code>). Відповідь — JSON з ECDSA(secp256k1) +
+        ML-DSA-65.
+      </p>
+      <table>
+        <tr><th>Query</th><th>Type</th><th>Description</th></tr>
+        <tr>
+          <td><code>sig</code></td>
+          <td>string</td>
+          <td>Signature scheme. For now: <code>ecdsa</code> (dual ECDSA + ML-DSA-65).</td>
+        </tr>
+      </table>
+      <pre><code>curl -s -H "X-API-Key: demo" \
+  "https://api.re4ctor.com/v1/vrf?sig=ecdsa" | jq .</code></pre>
+    </div>
+
+    <div class="endpoint">
+      <div>
+        <span class="endpoint-method method-post">POST</span>
+        <span class="endpoint-path">/v1/verify</span>
+      </div>
+      <p>
+        Helper endpoint для перевірки Ethereum-style ECDSA підпису від VRF
+        (<code>msg_hash / v / r / s</code>) на API боці.
+      </p>
+      <pre><code>curl -s -X POST "https://api.re4ctor.com/v1/verify" \
+  -H "Content-Type: application/json" \
+  -H "X-API-Key: demo" \
+  -d '{
+    "msg_hash": "0x...",
+    "r": "0x...",
+    "s": "0x...",
+    "v": 27,
+    "expected_signer": "0x1C901e3bd9..."
+  }' | jq .</code></pre>
+    </div>
+
+    <h2>Sample /v1/vrf response</h2>
+    <pre><code>{
+  "random": 4189626646,
+  "timestamp": "2025-11-19T19:24:31Z",
+  "hash_alg": "SHA-256",
+  "signature_type": "ECDSA(secp256k1) + ML-DSA-65",
+  "v": 27,
+  "r": "0x...",
+  "s": "0x...",
+  "msg_hash": "0x...",
+  "signer_addr": "0x1C901e3bd997BD46a9AE3967F8632EFbDFe72293",
+  "pq_scheme": "ML-DSA-65"
+}</code></pre>
+  </main>
+</body>
+</html>

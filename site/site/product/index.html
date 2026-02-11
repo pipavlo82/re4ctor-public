@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Re4ctoR — Features & Architecture</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #020617;
+      color: #e5e7eb;
+    }
+    header {
+      border-bottom: 1px solid #1f2937;
+      padding: 16px 24px;
+    }
+    header a {
+      color: #e5e7eb;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 0.75rem;
+    }
+    h2 {
+      font-size: 1.4rem;
+      margin-top: 2rem;
+      border-left: 3px solid #10b981;
+      padding-left: 10px;
+    }
+    p {
+      line-height: 1.6;
+      margin-bottom: 0.75rem;
+    }
+    ul {
+      margin-left: 1rem;
+      line-height: 1.6;
+    }
+    .box {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 20px 0;
+    }
+    code {
+      background: #020617;
+      padding: 2px 4px;
+      border-radius: 4px;
+      border: 1px solid #1f2937;
+      font-size: 0.9rem;
+    }
+    .arch {
+      background: #0a0f1f;
+      border-left: 4px solid #10b981;
+      padding: 16px 20px;
+      margin: 24px 0;
+      border-radius: 6px;
+    }
+    .arch span {
+      display: inline-block;
+      margin: 4px 0;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="/">⟵ Re4ctoR</a>
+  </header>
+
+  <main class="wrap">
+    <h1>Re4ctoR Product Overview</h1>
+    <p>
+      Re4ctoR is a nuclear-grade entropy engine with signed randomness,
+      post-quantum security, and global delivery via Cloudflare's edge.
+      Designed for Web3, fintech, defense and high-integrity systems.
+    </p>
+
+    <h2>Core Features</h2>
+
+    <div class="box">
+      <strong>High-entropy core</strong><br />
+      Multi-layer entropy: Xoshiro, ChaCha20, Keccak, Fisher-Yates, Pi-noise,
+      system jitter, template analysis, bias correction and whitening.
+    </div>
+
+    <div class="box">
+      <strong>Ultra-low latency</strong><br />
+      <ul>
+        <li>&lt;1 ms — inside the machine (local mode)</li>
+        <li>20–30 ms — global SaaS via Cloudflare Anycast</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <strong>950k requests/sec (local)</strong><br />
+      Optimized parallel pipelines allow near-hardware throughput.
+    </div>
+
+    <div class="box">
+      <strong>Verifiable randomness</strong><br />
+      <ul>
+        <li>ECDSA(secp256k1) signatures</li>
+        <li>ML-DSA / Dilithium (post-quantum, roadmap Q2 2026)</li>
+        <li>Hybrid dual signatures</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <strong>Deployment options</strong><br />
+      <ul>
+        <li>SaaS via Cloudflare</li>
+        <li>Self-hosted (Docker / systemd)</li>
+        <li>Secure Enclave edition</li>
+        <li>Air-gapped / Defense edition (NDA)</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <strong>FIPS Roadmap</strong><br />
+      <ul>
+        <li>FIPS 140-3 entropy source preparation</li>
+        <li>FIPS 204 (post-quantum) alignment</li>
+        <li>Deterministic KAT vectors + test harness</li>
+      </ul>
+    </div>
+
+    <h2>Architecture</h2>
+
+    <div class="arch">
+      <span>Cloudflare → Caddy → API Gateway → Entropy Core</span>
+      <p>
+        Cloudflare handles global routing, TLS and DDoS protection.
+        Caddy terminates edge TLS (origin). Gateway enforces API keys,
+        signatures and rate limiting. Core produces entropy and executes
+        PQ/dual signatures.
+      </p>
+    </div>
+
+    <h2>Why Re4ctoR</h2>
+    <ul>
+      <li>Faster than Chainlink VRF (seconds → milliseconds)</li>
+      <li>Self-hosted unlike drand or Chainlink</li>
+      <li>PQ-secure unlike most existing VRF providers</li>
+      <li>Battle-tested statistical pipeline (Dieharder / STS / PractRand)</li>
+    </ul>
+
+  </main>
+</body>
+</html>
