@@ -237,8 +237,8 @@
       color: #f97373;
     }
   </style>
-  <link rel="stylesheet" href="/assets/theme.css?v=20260202_194014">
-  <link rel="stylesheet" href="/assets/theme.css?v=20260202_194014">
+  <link rel="stylesheet" href="/assets/theme.css">
+  <link rel="stylesheet" href="/assets/theme.css">
 </head>
 <body>
   <header>
@@ -246,7 +246,7 @@
     <nav>
       <a href="/">Home</a>
       <a href="/#product">Product</a>
-      <a href="/api/">API</a>
+      <a href="/api">API</a>
       <a href="https://github.com/pipavlo82/r4-monorepo" target="_blank" rel="noopener">GitHub</a>
     </nav>
   </header>
@@ -277,7 +277,7 @@
             <div>
               <label for="api-base-url">API base URL</label>
               <input id="api-base-url" type="text"
-                     value="/api/"
+                     value="https://api.re4ctor.com"
                      autocomplete="off">
             </div>
             <div>
@@ -323,15 +323,15 @@
           <h3>Quick curl snippets</h3>
           <p class="muted">You can run these directly from your terminal.</p>
           <pre><code># health
-curl -s "/api/v1/health"
+curl -s "https://api.re4ctor.com/v1/health"
 
 # random bytes (hex)
 curl -s -H "X-API-Key: demo" \
-  "/api/v1/random?n=16&amp;fmt=hex"
+  "https://api.re4ctor.com/v1/random?n=16&amp;fmt=hex"
 
 # dual-signed VRF JSON
 curl -s -H "X-API-Key: demo" \
-  "/api/v1/vrf?sig=ecdsa" | jq .</code></pre>
+  "https://api.re4ctor.com/v1/vrf?sig=ecdsa" | jq .</code></pre>
         </div>
       </section>
 
@@ -421,7 +421,11 @@ curl -s -H "X-API-Key: demo" \
 
     <section style="margin-top:32px;">
       <p class="muted" style="font-size:0.8rem;">
-        Note: This playground uses the same-origin reverse proxy at <code>/api/</code>, so browser calls do not require cross-domain CORS. If you self-host on a different domain, enable CORS for <code>X-API-Key</code>.
+        Note: Browser calls from <code>re4ctor.com</code> to
+        <code>api.re4ctor.com</code> require CORS to be enabled on the gateway.
+        The demo gateway is CORS-enabled for <code>https://re4ctor.com</code>.
+        If your browser or network still blocks the call, you can always try
+        the curl examples above or the Python SDK.
       </p>
     </section>
   </main>
@@ -441,7 +445,7 @@ curl -s -H "X-API-Key: demo" \
       function cleanBaseUrl() {
         let url = baseInput.value.trim();
         if (!url) {
-          url = '/api/';
+          url = 'https://api.re4ctor.com';
           baseInput.value = url;
         }
         return url.replace(/\/+$/, '');

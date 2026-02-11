@@ -13,7 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=IBM+Plex+Mono:wght@300;400;600&family=Orbitron:wght@600;700;900&display=swap" rel="stylesheet" />
 
   <!-- External theme (keep once) -->
-  <link rel="stylesheet" href="/assets/theme.css?v=20260202_194014" />
+  <link rel="stylesheet" href="/assets/theme.css" />
 
   <style>
     :root{
@@ -562,8 +562,6 @@
       <nav aria-label="Primary">
         <a href="#benchmarks">Benchmarks</a>
         <a href="#architecture">Architecture</a>
-        <a href="#product">Product</a>
-        <a href="#security">Security</a>
         <a href="#compliance">Compliance</a>
         <a href="#pricing">Pricing</a>
         <a href="/docs/">Docs</a>
@@ -1094,7 +1092,7 @@
         <div style="font-family:var(--orb);letter-spacing:.16em;text-transform:uppercase;color:rgba(250,204,21,.92);margin-bottom:8px;">
           RE4CTOR
         </div>
-        <div>© 2025 RE4CTOR · BUILD: 20260130-203944 — sealed entropy appliance &amp; PQ-VRF gateway.</div>
+        <div>© 2025 RE4CTOR — sealed entropy appliance &amp; PQ-VRF gateway.</div>
         <div class="muted">FastAPI · Docker · Dual-Sig (ECDSA + ML-DSA-65)</div>
       </div>
 
@@ -1303,22 +1301,21 @@
     .addEventListener("click", () => callVrf(false));
 
   // -------------------------------
-  // Stripe checkout (Payment Links)
+  // Stripe checkout
   // -------------------------------
   async function buyPlan(priceId) {
-    const LINKS = {
-      "price_1SZ21JGGBPotZrQPmNR2pIhU": "https://buy.stripe.com/8x228rbmI4wE2vW5Eu6kg00", // .99
-      "price_1SZ23jGGBPotZrQPoEed0eAb": "https://buy.stripe.com/7sY14n62oe7edaAc2S6kg01", // .99
-      "price_1SZ24MGGBPotZrQP6YMckcyi": "https://buy.stripe.com/6oU7sL76sgfm0nO6Iy6kg02"  // .99
-    };
-
-    const id = String(priceId || "").trim();
-    const url = LINKS[id];
-    if (!url) {
-      alert("Stripe link not configured for: " + id);
-      return;
+    try {
+      const res = await fetch("/api/v1/stripe/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "X-API-Key": "demo" },
+        body: JSON.stringify({ price_id: priceId })
+      });
+      const data = await res.json();
+      if (data.checkout_url) window.location.href = data.checkout_url;
+      else alert("Stripe error: " + JSON.stringify(data));
+    } catch (err) {
+      alert("Request failed: " + err);
     }
-    window.location.href = url;
   }
 
   // -------------------------------

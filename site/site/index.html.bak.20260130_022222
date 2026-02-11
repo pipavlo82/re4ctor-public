@@ -13,7 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=IBM+Plex+Mono:wght@300;400;600&family=Orbitron:wght@600;700;900&display=swap" rel="stylesheet" />
 
   <!-- External theme (keep once) -->
-  <link rel="stylesheet" href="/assets/theme.css?v=20260202_194014" />
+  <link rel="stylesheet" href="/assets/theme.css" />
 
   <style>
     :root{
@@ -562,8 +562,6 @@
       <nav aria-label="Primary">
         <a href="#benchmarks">Benchmarks</a>
         <a href="#architecture">Architecture</a>
-        <a href="#product">Product</a>
-        <a href="#security">Security</a>
         <a href="#compliance">Compliance</a>
         <a href="#pricing">Pricing</a>
         <a href="/docs/">Docs</a>
@@ -591,12 +589,12 @@
 
           <div class="cta-row">
             <a class="btn primary" href="#benchmarks">Live Demo</a>
-            <a class="btn" href="https://re4ctor.com/api/" target="_blank" rel="noopener">Open API Gateway</a>
-            <a class="btn" href="/api/">API Docs</a>
+            <a class="btn" href="https://api.re4ctor.com/" target="_blank" rel="noopener">Open API Gateway</a>
+            <a class="btn" href="/docs/api/">API Docs</a>
           </div>
 
           <div class="note">
-            Gateway: <code>/api/</code><br/>
+            Gateway: <code>https://api.re4ctor.com</code><br/>
             Demo header: <code>X-API-Key: demo</code> (rate-limited).
           </div>
         </div>
@@ -701,7 +699,7 @@
             <div class="field-row">
               <div>
                 <div class="label">API Base URL</div>
-                <input id="pg-base-url" class="input" value="/api/" />
+                <input id="pg-base-url" class="input" value="https://api.re4ctor.com" />
               </div>
               <div>
                 <div class="label">API Key (X-API-Key)</div>
@@ -716,7 +714,7 @@
             <div class="pg-actions">
               <button class="btn primary" id="btn-call-random" type="button">Call /v1/random</button>
               <button class="btn" id="btn-call-vrf" type="button">Call /v1/vrf?sig=ecdsa</button>
-              <a class="btn" href="https://re4ctor.com/api/" target="_blank" rel="noopener">Open https://re4ctor.com/api</a>
+              <a class="btn" href="https://api.re4ctor.com/" target="_blank" rel="noopener">Open https://api.re4ctor.com</a>
             </div>
 
             <div class="toggles">
@@ -931,105 +929,7 @@
     </div>
   </section>
 
-    <!-- PRODUCT -->
-  <section id="product" class="section">
-    <h3 class="reveal">Product surfaces</h3>
-    <p class="lead reveal">
-      Everything you consume is an explicit surface: <b>entropy bytes</b>, <b>dual-signed VRF</b>, and <b>verification helpers</b>.
-      The site keeps wording conservative; the artifacts live in <a href="/docs/test-reports/">Test Reports</a> and <a href="/docs/sbom/">SBOM</a>.
-    </p>
-
-    <div class="cards">
-      <div class="card reveal">
-        <div class="tag">RNG surface</div>
-        <div class="big"><span class="mono">GET /v1/random</span></div>
-        <div class="desc">
-          Raw high-entropy bytes via the gateway. Designed for fairness-sensitive protocols, gaming, L2 sequencing, and AA.
-        </div>
-      </div>
-      <div class="card reveal">
-        <div class="tag">VRF surface</div>
-        <div class="big"><span class="mono">GET /v1/vrf</span></div>
-        <div class="desc">
-          Dual-signed output (<b>ECDSA + ML-DSA-65</b> roadmap lane). JSON response suitable for audit trails.
-        </div>
-      </div>
-      <div class="card reveal">
-        <div class="tag">Verification</div>
-        <div class="big"><span class="mono">POST /v1/verify</span></div>
-        <div class="desc">
-          Helper endpoint for integrators to validate an ECDSA signature from VRF output (useful during integration and CI).
-        </div>
-      </div>
-    </div>
-
-    <div class="panel reveal" style="margin-top:12px;">
-      <div class="panel-inner">
-        <div class="mono" style="letter-spacing:.14em;text-transform:uppercase;color:rgba(34,211,238,.95);font-size:.78rem;margin-bottom:8px;">
-          Quickstart (copy/paste)
-        </div>
-
-        <div class="grid-2">
-          <div class="mini">
-            <div class="lbl">1) Check gateway</div>
-            <div class="sub mono">curl -s https://api.re4ctor.com/v1/health</div>
-          </div>
-          <div class="mini">
-            <div class="lbl">2) Random bytes (hex)</div>
-            <div class="sub mono">curl -s -H "X-API-Key: demo" "https://api.re4ctor.com/v1/random?n=16&amp;fmt=hex"</div>
-          </div>
-        </div>
-
-        <div class="grid-2" style="margin-top:10px;">
-          <div class="mini">
-            <div class="lbl">3) Dual-signed VRF JSON</div>
-            <div class="sub mono">curl -s -H "X-API-Key: demo" "https://api.re4ctor.com/v1/vrf?sig=ecdsa" | jq .</div>
-          </div>
-          <div class="mini">
-            <div class="lbl">Docs &amp; artifacts</div>
-            <div class="sub">
-              <a class="mono" href="/docs/quickstart/">/docs/quickstart/</a> ·
-              <a class="mono" href="/docs/test-reports/">/docs/test-reports/</a> ·
-              <a class="mono" href="/docs/sbom/">/docs/sbom/</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="muted mono" style="margin-top:10px;font-size:.78rem;line-height:1.5;">
-          Tip: the website playground uses <code class="mono">/api/</code> (same-origin reverse proxy). For direct calls, use <code class="mono">https://api.re4ctor.com</code>.
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECURITY -->
-  <section id="security" class="section">
-    <h3 class="reveal">Security posture</h3>
-    <p class="lead reveal">
-      RE4CTOR is built around an operational invariant: <b>fail-closed entropy</b>. If health/quality degrades, output stops.
-      The perimeter stays auditable via signed responses and reproducible artifacts.
-    </p>
-
-    <div class="cards">
-      <div class="card reveal">
-        <div class="tag">Fail-closed</div>
-        <div class="big">Stop &amp; alert</div>
-        <div class="desc">No silent degradation: health tests gate output instead of letting &ldquo;maybe-random&rdquo; leak into production.</div>
-      </div>
-      <div class="card reveal">
-        <div class="tag">Audit bundle</div>
-        <div class="big">Reports + SBOM</div>
-        <div class="desc">Artifacts are versioned and shippable: <a href="/docs/test-reports/">test reports</a>, <a href="/docs/sbom/">SBOM</a>, and integrity notes.</div>
-      </div>
-      <div class="card reveal">
-        <div class="tag">PQ track</div>
-        <div class="big">Explicit migration</div>
-        <div class="desc">Dual-signing supports today (ECDSA) and an explicit PQ lane (ML-DSA-65) with measured surfaces and benchmarks.</div>
-      </div>
-    </div>
-  </section>
-
-<!-- PRICING -->
+  <!-- PRICING -->
   <section id="pricing" class="section">
     <h3 class="reveal">Pricing</h3>
     <p class="lead reveal">Choose a plan and get redirected to Stripe Checkout.</p>
@@ -1094,13 +994,13 @@
         <div style="font-family:var(--orb);letter-spacing:.16em;text-transform:uppercase;color:rgba(250,204,21,.92);margin-bottom:8px;">
           RE4CTOR
         </div>
-        <div>© 2025 RE4CTOR · BUILD: 20260130-203944 — sealed entropy appliance &amp; PQ-VRF gateway.</div>
+        <div>© 2025 RE4CTOR — sealed entropy appliance &amp; PQ-VRF gateway.</div>
         <div class="muted">FastAPI · Docker · Dual-Sig (ECDSA + ML-DSA-65)</div>
       </div>
 
       <div class="legal">
-        <a href="https://re4ctor.com/api/" target="_blank" rel="noopener">API Gateway</a>
-        <a href="/api/" target="_blank" rel="noopener">API Docs</a>
+        <a href="https://api.re4ctor.com/" target="_blank" rel="noopener">API Gateway</a>
+        <a href="/docs/api/" target="_blank" rel="noopener">API Docs</a>
         <a href="/terms.html">Terms</a>
         <a href="/privacy.html">Privacy</a>
         <a href="/security.html">Security</a>
@@ -1222,7 +1122,7 @@
     const apiKeyInput = document.getElementById("pg-api-key");
     const nInput = document.getElementById("pg-n");
 
-    const base = (baseInput.value || "/api/").replace(/\/+$/, "");
+    const base = (baseInput.value || "https://api.re4ctor.com").replace(/\/+$/, "");
     const apiKey = apiKeyInput.value || "demo";
 
     // UI uses 32-bit words; API expects bytes.
@@ -1303,22 +1203,21 @@
     .addEventListener("click", () => callVrf(false));
 
   // -------------------------------
-  // Stripe checkout (Payment Links)
+  // Stripe checkout
   // -------------------------------
   async function buyPlan(priceId) {
-    const LINKS = {
-      "price_1SZ21JGGBPotZrQPmNR2pIhU": "https://buy.stripe.com/8x228rbmI4wE2vW5Eu6kg00", // .99
-      "price_1SZ23jGGBPotZrQPoEed0eAb": "https://buy.stripe.com/7sY14n62oe7edaAc2S6kg01", // .99
-      "price_1SZ24MGGBPotZrQP6YMckcyi": "https://buy.stripe.com/6oU7sL76sgfm0nO6Iy6kg02"  // .99
-    };
-
-    const id = String(priceId || "").trim();
-    const url = LINKS[id];
-    if (!url) {
-      alert("Stripe link not configured for: " + id);
-      return;
+    try {
+      const res = await fetch("https://api.re4ctor.com/v1/stripe/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "X-API-Key": "demo" },
+        body: JSON.stringify({ price_id: priceId })
+      });
+      const data = await res.json();
+      if (data.checkout_url) window.location.href = data.checkout_url;
+      else alert("Stripe error: " + JSON.stringify(data));
+    } catch (err) {
+      alert("Request failed: " + err);
     }
-    window.location.href = url;
   }
 
   // -------------------------------

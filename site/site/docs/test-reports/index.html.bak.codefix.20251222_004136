@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>RE4CTOR — Docs</title>
+  <title>RE4CTOR — Test Reports</title>
   <style>
     body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;max-width:980px;margin:40px auto;padding:0 16px;line-height:1.45}
     a{color:inherit}
@@ -12,24 +12,27 @@
     .muted{opacity:.75}
     ul{margin:12px 0 0 18px}
   </style>
-  <link rel="stylesheet" href="/assets/theme.css?v=20260202_194014">
-  <link rel="stylesheet" href="/assets/theme.css?v=20260202_194014">
 </head>
 <body>
-  <p><a href="/">← Back</a></p>
-  <h1>Docs</h1>
-  <p class="muted">Public-facing artifacts and operational notes. Some materials may be available on request.</p>
+  <p><a href="/docs/">← Docs</a> · <a href="/">Home</a></p>
+  <h1>Test Reports</h1>
+  <p class="muted">Statistical validation bundles tied to specific core versions.</p>
 
-  <h2>Artifacts</h2>
+  <h2>What we publish</h2>
   <ul>
-    <li><a href="/docs/audit/">Audit notes</a></li>
-    <li><a href="/docs/benchmarks/">Benchmarks</a></li>
-    <li><a href="/docs/test-reports/">Test reports</a></li>
-    <li><a href="/docs/sbom/">SBOM</a></li>
+    <li>Test battery name and version</li>
+    <li>Input size and generation settings</li>
+    <li>Pass/fail summary + reproducibility notes</li>
   </ul>
 
-  <h2>Contacts</h2>
-  <p>Security: <code>pientropy.2025@gmail.com</code> · Support: <code>pientropy.2025@gmail.com</code></p>
+  <h2>What may be provided on request</h2>
+  <ul>
+    <li>Full raw logs and large artifacts (size/volume constraints)</li>
+    <li>Version-hash mapping and integrity manifests</li>
+  </ul>
+
+  <h2>Contact</h2>
+  <p>Security: <code>security@re4ctor.com</code></p>
 
 <hr style="margin:28px 0;opacity:.2" />
 <div style="text-align:center;opacity:.85;font-size:14px;font-weight:600">
@@ -39,15 +42,5 @@
   <span style="opacity:.55">·</span>
   <a style="color:inherit;text-decoration:none;margin:0 10px" href="/security.html">Security</a>
 </div>
-
-
-<h2>Artifacts</h2>
-<ul>
-  <li><a href="/docs/audit/">Audit</a></li>
-  <li><a href="/docs/benchmarks/">Benchmarks</a></li>
-  <li><a href="/docs/test-reports/">Test reports</a></li>
-  <li><a href="/docs/sbom/">SBOM</a></li>
-</ul>
-
 </body>
 </html>

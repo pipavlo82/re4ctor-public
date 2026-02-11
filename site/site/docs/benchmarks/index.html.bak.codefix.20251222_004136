@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>RE4CTOR — Docs</title>
+  <title>RE4CTOR — Benchmarks</title>
   <style>
     body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;max-width:980px;margin:40px auto;padding:0 16px;line-height:1.45}
     a{color:inherit}
@@ -12,24 +12,30 @@
     .muted{opacity:.75}
     ul{margin:12px 0 0 18px}
   </style>
-  <link rel="stylesheet" href="/assets/theme.css?v=20260202_194014">
-  <link rel="stylesheet" href="/assets/theme.css?v=20260202_194014">
 </head>
 <body>
-  <p><a href="/">← Back</a></p>
-  <h1>Docs</h1>
-  <p class="muted">Public-facing artifacts and operational notes. Some materials may be available on request.</p>
+  <p><a href="/docs/">← Docs</a> · <a href="/">Home</a></p>
+  <h1>Benchmarks</h1>
+  <p class="muted">Methodology notes for latency/throughput measurements and reproducible runs.</p>
 
-  <h2>Artifacts</h2>
+  <h2>Latency</h2>
   <ul>
-    <li><a href="/docs/audit/">Audit notes</a></li>
-    <li><a href="/docs/benchmarks/">Benchmarks</a></li>
-    <li><a href="/docs/test-reports/">Test reports</a></li>
-    <li><a href="/docs/sbom/">SBOM</a></li>
+    <li>Report p50/p95/p99 and sample size (N)</li>
+    <li>Specify region, network path, and payload size</li>
+    <li>Clarify scope: gateway request → signed response</li>
   </ul>
 
-  <h2>Contacts</h2>
-  <p>Security: <code>pientropy.2025@gmail.com</code> · Support: <code>pientropy.2025@gmail.com</code></p>
+  <h2>Throughput</h2>
+  <ul>
+    <li>Publish only with full harness + host specs (CPU/RAM), limits, concurrency</li>
+    <li>Include error rates and backpressure behavior</li>
+  </ul>
+
+  <h2>Live</h2>
+  <ul>
+    <li><a href="/api/">Interactive API playground</a></li>
+    <li><a href="https://api.re4ctor.com/openapi.json">OpenAPI JSON</a></li>
+  </ul>
 
 <hr style="margin:28px 0;opacity:.2" />
 <div style="text-align:center;opacity:.85;font-size:14px;font-weight:600">
@@ -39,15 +45,5 @@
   <span style="opacity:.55">·</span>
   <a style="color:inherit;text-decoration:none;margin:0 10px" href="/security.html">Security</a>
 </div>
-
-
-<h2>Artifacts</h2>
-<ul>
-  <li><a href="/docs/audit/">Audit</a></li>
-  <li><a href="/docs/benchmarks/">Benchmarks</a></li>
-  <li><a href="/docs/test-reports/">Test reports</a></li>
-  <li><a href="/docs/sbom/">SBOM</a></li>
-</ul>
-
 </body>
 </html>

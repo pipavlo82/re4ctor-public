@@ -12,8 +12,6 @@
     .muted{opacity:.75}
     ul{margin:12px 0 0 18px}
   </style>
-  <link rel="stylesheet" href="/assets/theme.css?v=20260202_194014">
-  <link rel="stylesheet" href="/assets/theme.css?v=20260202_194014">
 </head>
 <body>
   <p><a href="/">← Back</a></p>
@@ -29,25 +27,6 @@
   </ul>
 
   <h2>Contacts</h2>
-  <p>Security: <code>pientropy.2025@gmail.com</code> · Support: <code>pientropy.2025@gmail.com</code></p>
-
-<hr style="margin:28px 0;opacity:.2" />
-<div style="text-align:center;opacity:.85;font-size:14px;font-weight:600">
-  <a style="color:inherit;text-decoration:none;margin:0 10px" href="/terms.html">Terms</a>
-  <span style="opacity:.55">·</span>
-  <a style="color:inherit;text-decoration:none;margin:0 10px" href="/privacy.html">Privacy</a>
-  <span style="opacity:.55">·</span>
-  <a style="color:inherit;text-decoration:none;margin:0 10px" href="/security.html">Security</a>
-</div>
-
-
-<h2>Artifacts</h2>
-<ul>
-  <li><a href="/docs/audit/">Audit</a></li>
-  <li><a href="/docs/benchmarks/">Benchmarks</a></li>
-  <li><a href="/docs/test-reports/">Test reports</a></li>
-  <li><a href="/docs/sbom/">SBOM</a></li>
-</ul>
-
+  <p>Security: <code>security@re4ctor.com</code> · Support: <code>support@re4ctor.com</code></p>
 </body>
 </html>

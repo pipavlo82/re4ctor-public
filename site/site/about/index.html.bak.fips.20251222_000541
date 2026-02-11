@@ -70,8 +70,6 @@
       font-size: 0.9rem;
     }
   </style>
-  <link rel="stylesheet" href="/assets/theme.css?v=20260202_194014">
-  <link rel="stylesheet" href="/assets/theme.css?v=20260202_194014">
 </head>
 <body>
   <header>
@@ -111,7 +109,7 @@
 
     <h2>Roadmap & Compliance</h2>
     <p>
-      Re4ctoR is designed to align with FIPS-style entropy requirements and the FIPS 204 (post-quantum signatures)
+      Re4ctoR is designed with FIPS 140-3 entropy requirements and FIPS 204 (post-quantum signatures)
       in mind. While formal certification is a separate process, the architecture, documentation and
       test harnesses are built to align with those standards from day one.
     </p>
