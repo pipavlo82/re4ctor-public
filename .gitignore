@@ -1,11 +1,41 @@
+# Python
 .venv/
 __pycache__/
-*.pyc
+*.py[cod]
 *.pyo
 *.pyd
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+*.egg-info/
+dist/
+build/
+
+# Logs / temp
 nohup.out
-/tmp/
 *.log
+/tmp/
+*.tmp
+*.swp
+*.swo
+
+# Backups / editor artifacts
+*.bak
+*.bak.*
+*.orig
+*.rej
+*.broken.*
+*.good.*
+
+# Node / Hardhat
+node_modules/
+artifacts/
+cache/
+coverage/
+coverage.json
+typechain/
+typechain-types/
+*.tsbuildinfo
+
+# OS
+.DS_Store
