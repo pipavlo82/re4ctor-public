@@ -1,21 +1,11 @@
-# python
+.venv/
 __pycache__/
 *.pyc
-
-# editor/backup junk
-*.bak
-*.bak.*
-*.broken*
-*.good.*
-*.fix*
-*.dump*
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+nohup.out
+/tmp/
 *.log
-*.tmp
-*.swp
-
-# local env/secrets
-.env
-.env.*
-*.pem
-*.key
-*.crt
