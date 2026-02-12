@@ -1,0 +1,20 @@
+services:
+  billing:
+    container_name: r4-billing
+    image: pipavlo/r4-billing:latest
+    restart: unless-stopped
+    environment:
+      BILLING_DATABASE_URL: ${BILLING_DATABASE_URL:-postgresql://r4:r4@postgres:5432/r4}
+      BILLING_REDIS_URL: ${BILLING_REDIS_URL:-redis://redis:6379/0}
+      BILLING_SIGNING_SECRET: ${BILLING_SIGNING_SECRET:-dev_secret_change_me}
+      BILLING_LOG_LEVEL: ${BILLING_LOG_LEVEL:-info}
+      PORT: 8090
+    command: ["sh","-lc","uvicorn app.main:app --host 0.0.0.0 --port 8090"]
+    networks:
+      - r4net
+    ports:
+      - "8090:8090"
+
+networks:
+  r4net:
+    external: true
