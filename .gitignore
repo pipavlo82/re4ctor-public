@@ -39,3 +39,6 @@ typechain-types/
 
 # OS
 .DS_Store
+
+# Local attic (not for publish)
+attic/
