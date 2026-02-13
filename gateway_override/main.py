@@ -735,7 +735,6 @@ HOMEPAGE_HTML = """
             </button>
             <button id="btn-call-dual-full" class="playground-btn secondary">
               <span class="icon">🧬</span>
-              <span>/v1/random_dual_full?sig=dual</span>
             </button>
           </div>
 
@@ -746,7 +745,6 @@ HOMEPAGE_HTML = """
           </div>
 
           <div id="log-box" class="log-box">
-Ready. Click “Call /v1/random”, “Call /v1/vrf?sig=ecdsa” or “/v1/random_dual_full?sig=dual”.
           </div>
         </div>
       </div>
@@ -799,7 +797,6 @@ curl -s -H "X-API-Key: demo" \\
   "<span id="curl-base-url-2" class="url">https://api.re4ctor.com</span>/v1/vrf?sig=ecdsa" | jq .
 
 curl -s -H "X-API-Key: demo" \\
-  "<span id="curl-base-url-3" class="url">https://api.re4ctor.com</span>/v1/random_dual_full?sig=dual" | jq .
           </div>
         </div>
       </div>
@@ -906,7 +903,6 @@ curl -s -H "X-API-Key: demo" \\
       }
       if (btnDualFull) {
         btnDualFull.addEventListener("click", function() {
-          callEndpoint("/v1/random_dual_full?sig=dual");
         });
       }
       if (btnTry) {
@@ -1031,37 +1027,6 @@ async def random_dual_proxy(
         status_code=r.status_code,
         media_type=r.headers.get("content-type", "application/json"),
     )
-
-
-@app.get("/v1/random_dual_full")
-async def random_dual_full_proxy(
-    sig: str,
-    api_key: str = Depends(require_api_key),
-):
-    """
-    Повний dual-sig об'єкт із VRF ноди:
-    - random
-    - msg_hash
-    - ECDSA (v,r,s)
-    - ML-DSA-65 sig (base64)
-    - PQ public key
-    """
-    upstream = f"{VRF_URL}/random_dual_full"
-    params = {"sig": sig}
-    headers = {"X-API-Key": INTERNAL_R4_API_KEY}
-
-    try:
-        async with httpx.AsyncClient(timeout=20.0) as client:
-            r = await client.get(upstream, params=params, headers=headers)
-    except httpx.HTTPError as e:
-        raise HTTPException(status_code=502, detail=f"vrf_unreachable: {e!s}")
-
-    return Response(
-        content=r.content,
-        status_code=r.status_code,
-        media_type=r.headers.get("content-type", "application/json"),
-    )
-
 
 @app.post("/v1/verify")
 async def verify_signature(req: VerifyRequest):
