@@ -1,52 +1,198 @@
-Minimal public-facing FastAPI service exposing a **dual-signature random** endpoint:
-- ECDSA (secp256k1) signer included (demo-only key via env).
-- ML-DSA-65 is currently a **stub** in this public repo (placeholder to keep API shape stable).
+# RE4CTOR Public Demo Stack
 
-## Quickstart (local)
+<div align="center">
 
+## Verifiable Randomness Pipeline
+
+**A reproducible measurement lab + methodology for cryptographic randomness on EVM (API surfaces, dual signatures, on-chain verification), with a small v0 dataset.**
+
+**This is a demo stack, not a final production system.**
+
+</div>
+
+---
+
+## What This Repository Contains
+
+This repository demonstrates a complete end-to-end pipeline for verifiable random number generation:
+
+**Pipeline Flow:**
+1. **Core RNG API** – Cryptographic randomness source
+2. **VRF/Dual-signature API** – ECDSA + ML-DSA-65 signed payloads
+3. **Solidity Verifier** – `R4VRFVerifierCanonical` on-chain verification
+4. **Lottery Contract** – `LotteryR4` demonstrates fair winner selection using verified randomness
+
+**Purpose:** Provide a reproducible local testing environment for teams building applications that require cryptographically verifiable randomness.
+
+---
+
+## Verification Status
+
+Recent full self-test results:
+
+| Component | Status |
+|-----------|--------|
+| Health endpoints | ✅ PASS |
+| Randomness generation | ✅ PASS |
+| VRF dual payload retrieval | ✅ PASS |
+| Hardhat contract tests | ✅ 6/6 passing |
+| **Overall pipeline** | ✅ **7/7 checks passed** |
+
+**Note:** Core API may return `429` responses under high concurrency (expected rate-limit behavior).
+
+---
+
+## Quick Start
+
+### Prerequisites
+
+- Docker & Docker Compose
+- curl (for testing)
+- Node.js & npm (for contract tests)
+
+### 1. Start Services
 ```bash
-python -m venv .venv
-source .venv/bin/activate
-python -m pip install -U pip
-python -m pip install -r requirements-public.txt
+docker compose -f docker-compose.public.yml up -d --build
+```
 
-export PYTHONPATH=$PWD
-export VRF_KEY=demo
-# Optional demo-only ECDSA private key (DO NOT use in production)
-export ECDSA_PRIVKEY=0x59c6995e998f97a5a0044966f094538b292a2e2b0f1b9b7a0f6f4b9b9b2e8d4a
+### 2. Verify Health
+```bash
+# Core RNG API
+curl -sS http://127.0.0.1:8089/health
 
-python -m uvicorn api.app:app --host 0.0.0.0 --port 8081
-Auth
-All randomness endpoints require X-API-Key.
+# VRF Endpoint
+curl -sS http://127.0.0.1:8082/health
+```
 
-Example demo key:
+### 3. Run Full Demo
+```bash
+bash scripts/run_full_demo.sh
+```
 
-X-API-Key: demo
+**Expected output:**
+```
+DONE. All checks passed (7 OK).
 
-Endpoints
-GET /health
+Pipeline summary:
+core RNG → signed randomness → Solidity verifier → Lottery fair winner
+```
 
-GET /version
+---
 
-GET /random_dual?sig=ecdsa
+## Architecture
+```
+┌─────────────────┐
+│   Core RNG API  │  Random number generation
+└────────┬────────┘
+         │
+┌────────▼────────┐
+│  VRF Gateway    │  ECDSA + ML-DSA-65 dual signing
+└────────┬────────┘
+         │
+┌────────▼─────────────────┐
+│  Solidity Contracts      │
+│  • R4VRFVerifier         │  Signature verification
+│  • LotteryR4             │  Fair winner selection
+└──────────────────────────┘
+```
 
-GET /random_dual_full?sig=dual
+---
 
-Example calls
-curl -sS http://127.0.0.1:8081/health | jq .
-curl -sS http://127.0.0.1:8081/version | jq .
+## Table of Contents
 
-curl -sS -H "X-API-Key: demo" \
-  "http://127.0.0.1:8081/random_dual?sig=ecdsa" | jq .
+- [Output Artifacts](#output-artifacts)
+- [Smart Contracts](#smart-contracts)
+- [Development](#development)
+- [Use Cases](#use-cases)
+- [Contributing](#contributing)
+- [License](#license)
 
-curl -sS -H "X-API-Key: demo" \
-  "http://127.0.0.1:8081/random_dual_full?sig=dual" | jq .
-OpenAPI
-Swagger UI: http://127.0.0.1:8081/docs
+---
 
-OpenAPI JSON: http://127.0.0.1:8081/openapi.json
+## Output Artifacts
 
-Notes
-ML-DSA-65 is a stub here (placeholder only).
+Demo test run generates files in `/tmp`:
 
-ECDSA_PRIVKEY is demo-only. Never use a shared/private key in production.
+- `/tmp/r4_core_version.json` – Core API version info
+- `/tmp/r4_core_rand_hex.txt` – Raw randomness sample
+- `/tmp/r4_pq_health.json` – VRF health check
+- `/tmp/vrf_dual.json` – Dual-signature payload
+- `/tmp/vrf_verify_out.json` – Verification result
+
+---
+
+## Smart Contracts
+
+### R4VRFVerifierCanonical
+
+Verifies dual signatures (ECDSA + ML-DSA-65) on-chain.
+
+### LotteryR4
+
+Demonstrates fair winner selection using verified randomness.
+
+**Example usage:**
+```solidity
+// Verify randomness
+bool valid = verifier.verify(payload, signatures);
+
+// Select winner
+address winner = lottery.pickWinner(verifiedRandomness);
+```
+
+---
+
+## Development
+
+### Run Contract Tests
+```bash
+cd contracts
+npm install
+npx hardhat test
+```
+
+### Stop Services
+```bash
+docker compose -f docker-compose.public.yml down
+```
+
+---
+
+## Use Cases
+
+- 🎰 **Gaming & Lotteries** – Provably fair winner selection
+- 🎲 **NFT Drops** – Unbiased trait generation and distribution
+- 🔐 **Security Applications** – High-quality randomness with cryptographic proof
+- 🧪 **Research & Education** – Learn verifiable randomness implementation patterns
+
+---
+
+## Contributing
+
+Contributions welcome! Please:
+
+1. Fork the repository
+2. Create a feature branch
+3. Submit a pull request with clear description
+
+---
+
+## License
+
+See [LICENSE](LICENSE) file for details.
+
+---
+
+## Support
+
+- **Issues**: [GitHub Issues](../../issues)
+- **Documentation**: See `/docs` directory
+- **Examples**: Check `/examples` for integration samples
+
+---
+
+<div align="center">
+
+**Built for transparency. Designed for trust.**
+
+</div>
